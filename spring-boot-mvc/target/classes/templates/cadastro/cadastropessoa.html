@@ -7,17 +7,21 @@
 <body>
     <h1>Cadastro de pessoa</h1>
 
-    <form action="salvarpessoa" method="post">
+    <form action="salvarpessoa" method="post" th:object="${pessoaobj}">
+
+        <label>ID</label>
+        <input name= "id" th:field="*{id}" readonly="readonly">
+
         <label>Nome: </label>
-        <input name= "nome">
+        <input name= "nome" th:field="*{nome}">
 
         <label>Sobrenome: </label>
-        <input name= "sobrenome">
+        <input name= "sobrenome" th:field="*{sobrenome}">
 
         <input type= "submit" value="Salvar">
     </form>
 
-    <h3>Pessoas salvas</h3>
+    <h3>Pessoas salvas: </h3>
 
     <form action="listarpessoas" method="get">
         <table>
@@ -25,6 +29,7 @@
                 <td th:text = "${pessoa.id}"></td>
                 <td th:text = "${pessoa.nome}"></td>
                 <td th:text = "${pessoa.sobrenome}"></td>
+                <td> <a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a> </td>
             </tr>
         </table>
         <input type= "submit" value="Listar Pessoas">
