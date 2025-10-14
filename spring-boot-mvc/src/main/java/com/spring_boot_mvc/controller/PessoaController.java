@@ -69,4 +69,14 @@ public class PessoaController {
         andView.addObject("pessoaobj", new Pessoa());
         return andView;
     }
+
+    @PostMapping(value = "/pesquisarpessoa")
+    public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa){
+
+        ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+        andView.addObject("pessoas", pessoaRepository.buscarPorNome(nomepesquisa));
+        andView.addObject("pessoaobj", new Pessoa());
+
+        return andView;
+    }
 }

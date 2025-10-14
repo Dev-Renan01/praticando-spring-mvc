@@ -20,6 +20,14 @@
 
         <input type= "submit" value="Salvar">
     </form>
+<br/>
+<br/>
+        <form action="pesquisarpessoa" method="post">
+            <label>Pesquisar por nome:</label>
+            <input name="nomepesquisa">
+            <input type ="submit" value="buscar">
+        </form>
+
 
     <h3>Pessoas salvas: </h3>
 
@@ -33,6 +41,8 @@
                 <td> <a th:href="@{/deletarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a> </td>
             </tr>
         </table>
+
+
         <input type= "submit" value="Listar Pessoas">
     </form>
 
