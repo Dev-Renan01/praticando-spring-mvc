@@ -2,10 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Spring Boot</title>
+    <title>Spring MVC</title>
 </head>
 <body>
-    <h1> Olá, seja bem vindo ao meu projeto Spring Boot!</h1>
-    <a href="/cadastropessoa">Cadastrar usuário </a>
+    <h1> Olá, seja bem vindo ao meu projeto Spring MVC!</h1>
+
+    <h4>Para cadastrar algum usuário, clique no botão abaixo!</h4>
+
+    <!-- Botão de Cadastrar usuário - acessa a pág. cadastrarpessoa.html-->
+    <form action="/cadastropessoa" method="get">
+        <button type="submit">Cadastrar usuário</button>
+    </form>
 </body>
 </html>

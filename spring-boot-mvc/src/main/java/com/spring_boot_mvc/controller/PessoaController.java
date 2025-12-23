@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Iterator;
 import java.util.Optional;
 
 @Controller
@@ -17,22 +15,23 @@ public class PessoaController {
 
 
     @RequestMapping (value = "/cadastropessoa", method = RequestMethod.GET)
-    public ModelAndView inicio(){
+    public ModelAndView inicio(){ // ModelAndView é uma classe do Spring MVC que une o Model e a View
 
         ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+
         andView.addObject("pessoaobj", new Pessoa());
         return andView;
     }
 
-    @RequestMapping(value = "/{path:.*}/salvarpessoa", method = RequestMethod.POST)
+    @RequestMapping(value = "/salvarpessoa", method = RequestMethod.POST)
     public ModelAndView salvar(Pessoa pessoa){
         pessoaRepository.save(pessoa);
 
-        ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
+        ModelAndView modelAndView = new ModelAndView("cadastro/poscadastro");
         Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
 
-        modelAndView.addObject("pessoas", pessoasIt);
-        modelAndView.addObject("pessoaobj", new Pessoa());
+        modelAndView.addObject("pessoas", pessoasIt);     // Envia a lista de pessoas para a view
+        modelAndView.addObject("pessoaobj", new Pessoa());    // Envia um novo objeto Pessoa vazio para limpar o formulário
 
         return modelAndView;
     }
@@ -55,7 +54,9 @@ public class PessoaController {
         Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);
 
         ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
-        andView.addObject("pessoaobj", pessoa.get());
+        andView.addObject("pessoaobj", pessoa.get()); // Envia a pessoa encontrada para o formulário
+        andView.addObject("pessoas", pessoaRepository.findAll());
+
         return andView;
     }
 
@@ -70,7 +71,7 @@ public class PessoaController {
         return andView;
     }
 
-    @PostMapping(value = "/pesquisarpessoa")
+    @GetMapping(value = "/pesquisarpessoa")
     public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa){
 
         ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");

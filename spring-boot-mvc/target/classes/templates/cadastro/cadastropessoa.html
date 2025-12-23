@@ -8,43 +8,55 @@
     <h1>Cadastro de pessoa</h1>
 
     <form action="salvarpessoa" method="post" th:object="${pessoaobj}">
-
         <label>ID</label>
-        <input name= "id" th:field="*{id}" readonly="readonly">
+        <input type="hidden" th:field="*{id}">
+        <input th:field="*{id}" readonly>
 
         <label>Nome: </label>
-        <input name= "nome" th:field="*{nome}">
+        <input name= "nome" th:field="*{nome}"> <!-- th:field faz o vínculo com o atributo nome da classe Pessoa -->
 
         <label>Sobrenome: </label>
         <input name= "sobrenome" th:field="*{sobrenome}">
 
-        <input type= "submit" value="Salvar">
+        <input type= "submit" value="Salvar"> <!-- Botão para enviar o formulário -->
     </form>
 <br/>
 <br/>
-        <form action="pesquisarpessoa" method="post">
+        <form action="pesquisarpessoa" method="post"> <!-- Formulário para pesquisar pessoas pelo nome -->
             <label>Pesquisar por nome:</label>
-            <input name="nomepesquisa">
-            <input type ="submit" value="buscar">
+
+            <input name="nomepesquisa"> <!-- Campo para digitar o nome da pesquisa -->
+
+            <input type ="submit" value="buscar"> <!-- Botão de busca -->
         </form>
 
 
     <h3>Pessoas salvas: </h3>
 
-    <form action="listarpessoas" method="get">
-        <table>
-            <tr th:each = "pessoa : ${pessoas}">
-                <td th:text = "${pessoa.id}"></td>
-                <td th:text = "${pessoa.nome}"></td>
-                <td th:text = "${pessoa.sobrenome}"></td>
-                <td> <a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a> </td>
-                <td> <a th:href="@{/deletarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a> </td>
-            </tr>
-        </table>
+    <table>
+        <tr th:each="pessoa : ${pessoas}">
+            <td th:text="${pessoa.id}"></td>
+            <td th:text="${pessoa.nome}"></td>
+            <td th:text="${pessoa.sobrenome}"></td>
 
+            <td>
+                <a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">
+                    Editar
+                </a>
+            </td>
 
-        <input type= "submit" value="Listar Pessoas">
+            <td>
+                <a th:href="@{/deletarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">
+                    Excluir
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <form th:action="@{/listarpessoas}" method="get">
+        <input type="submit" value="Listar Pessoas">
     </form>
+
 
 </body>
 </html>
