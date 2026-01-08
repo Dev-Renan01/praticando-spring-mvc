@@ -7,6 +7,7 @@
 <body>
     <h1>Cadastro de pessoa</h1>
 
+    <div class="row">
     <form action="salvarpessoa" method="post" th:object="${pessoaobj}">
         <label>ID</label>
         <input type="hidden" th:field="*{id}">
@@ -18,11 +19,14 @@
         <label>Sobrenome: </label>
         <input name= "sobrenome" th:field="*{sobrenome}">
 
-        <input type= "submit" value="Salvar"> <!-- Botão para enviar o formulário -->
+        <label>idade: </label>
+        <input name= "idade" th:field="*{idade}">
+        <input class= "waves-effect waves-light bnt" type="submit" value="Salvar"> <!-- Botão para enviar o formulário -->
     </form>
-<br/>
-<br/>
+    </div>
         <form action="pesquisarpessoa" method="post"> <!-- Formulário para pesquisar pessoas pelo nome -->
+            <br>
+            </br>
             <label>Pesquisar por nome:</label>
 
             <input name="nomepesquisa"> <!-- Campo para digitar o nome da pesquisa -->

@@ -48,14 +48,13 @@ public class PessoaController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/editarpessoa/{idpessoa}")
+    @PostMapping(value = "/editarpessoa/{idpessoa}")
     public ModelAndView editar(@PathVariable("idpessoa") Long idpessoa){
 
         Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);
 
         ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
         andView.addObject("pessoaobj", pessoa.get()); // Envia a pessoa encontrada para o formulário
-        andView.addObject("pessoas", pessoaRepository.findAll());
 
         return andView;
     }
